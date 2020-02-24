@@ -40,7 +40,7 @@ const ctx = canvas.getContext("2d");
 window.onload = () => {
   /** カメラ設定 */
   const constraints = {
-    video: true
+    video: { facingMode: { exact: "environment" } }
   };
 
   /**
