@@ -40,12 +40,7 @@ const ctx = canvas.getContext("2d");
 window.onload = () => {
   /** カメラ設定 */
   const constraints = {
-    audio: false,
-    video: {
-      width: 300,
-      height: 200,
-      facingMode: "user"   // フロントカメラを利用する
-    }
+    video: true
   };
 
   /**
