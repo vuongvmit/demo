@@ -1,30 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" >
 <head>
-	<title>Demo Read QR Code</title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="./instascan.min.js"></script>
+  <meta charset="UTF-8">
+  <title>CodePen - QR code scanner example</title>
+  <link rel="stylesheet" href="./style.css">
+
 </head>
 <body>
+<!-- partial:index.partial.html -->
+<video id="preview"></video>
 
-    <h1>Demo Read QR Code</h1>
+<script>
+document.addEventListener("DOMContentLoaded", event => {
+  let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+  Instascan.Camera.getCameras().then(cameras => {
+    scanner.camera = cameras[cameras.length - 1];
+    scanner.start();
+  }).catch(e => console.error(e));
 
-    <video id="preview"></video>
-    <script type="text/javascript">
-      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-      scanner.addListener('scan', function (content) {
-        alert(content);
-      });
-      Instascan.Camera.getCameras().then(function (cameras) {
-        if (cameras.length > 0) {
-          scanner.start(cameras[cameras.length - 1]);
-        } else {
-          console.error('No cameras found.');
-        }
-      }).catch(function (e) {
-        console.error(e);
-      });
-    </script>
+  scanner.addListener('scan', content => {
+    console.log(content);
+  });
+
+});
+  
+</script>
+<!-- partial -->
+  <script  src="./script.js"></script>
 
 </body>
 </html>
